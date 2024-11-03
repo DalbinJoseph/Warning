@@ -3,13 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Display</title>
+  <title>Random Image Display</title>
   <style>
     body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
     img { max-width: 100%; max-height: 100vh; object-fit: contain; }
   </style>
 </head>
 <body>
-  <img src="photo.jpeg" alt="Darren motivating to study">
+  <img id="randomImage" alt="Random image">
+  
+  <script>
+    // Specify the total number of images available (excluding the default photo.jpeg)
+    const totalImages = 5; // Change this number based on the number of images you have
+
+    // Generate a random number between 1 and totalImages
+    const randomNumber = Math.floor(Math.random() * totalImages) + 1;
+    
+    // Check if the numbered image exists, else fallback to photo.jpeg
+    const imgSrc = `photo${randomNumber}.jpeg`;
+    const fallbackImg = 'photo.jpeg';
+    
+    // Check if the image file exists by loading it
+    const img = document.getElementById('randomImage');
+    img.src = imgSrc;
+    img.onerror = function() {
+      img.src = fallbackImg; // If the numbered image doesn't exist, use fallback
+    };
+  </script>
 </body>
 </html>
